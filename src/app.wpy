@@ -1,0 +1,99 @@
+<style lang="less">
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      // 'pages/index',
+      'pages/login',
+      'pages/home',
+      'pages/activites',
+      'pages/features',
+      'pages/mine',
+      'pages/home/detail'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#333',
+      navigationBarTitleText: 'MyChat',
+      navigationBarTextStyle: 'white',
+      // navigationStyle:'custom'
+    },
+    tabBar: {
+      list: [{
+        pagePath: "pages/home",
+        iconPath:'image/shouye_0.png',
+        selectedIconPath:'image/shouye_1.png',
+        text: "首页"
+      }, {
+        pagePath: "pages/activites",
+        iconPath:'image/kecheng_0.png',
+        selectedIconPath:'image/kecheng_1.png',
+        text: "课程"
+      }, {
+        pagePath: "pages/features",
+        iconPath:'image/shizi_0.png',
+        selectedIconPath:'image/shizi_1.png',
+        text: "师资"
+      }, {
+        pagePath: "pages/mine",
+        iconPath:'image/wode_0.png',
+        selectedIconPath:'image/wode_1.png',
+        text: "我的"
+      }]
+    },
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
+
+  onLaunch() {
+    this.testAsync()
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
+
+  getUserInfo(cb) {
+    const that = this
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+    wepy.getUserInfo({
+      success (res) {
+        that.globalData.userInfo = res.userInfo
+        cb && cb(res.userInfo)
+      }
+    })
+  }
+}
+</script>

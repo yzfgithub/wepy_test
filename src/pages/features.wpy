@@ -1,0 +1,44 @@
+<template lang="wxml">
+  <view>
+    功能
+  </view>
+</template>
+<style lang="css">
+
+</style>
+<script>
+  import wepy from 'wepy'
+  export default class Features extends wepy.page {
+    config={
+      navigationBarTitleText:'home'
+    };
+    components={};
+    data={};
+    methods={};
+    events={};
+    onLoad(){
+      console.log('onload')
+    };
+    onReady(){
+      console.log('onReady')
+    };
+    onShow(){
+      console.log('onShow')
+    };
+    onHide(){
+      console.log('onHide')
+    };
+    onUnload(){
+      console.log('onUnload')
+    };
+    onPullDownRefresh(){
+      console.log('onPullDownRefresh')
+    };
+    onReachBottom(){
+      console.log('onReachBottom')
+    };
+    onShareAppMessage(){
+      console.log('onShareAppMessage')
+    }
+  }
+</script>

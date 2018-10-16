@@ -1,0 +1,92 @@
+<template lang="wxml">
+  <view class='authorize-container'>
+    <image class='authorize-icon' src="../image/kecheng_0.png"></image>
+    <view class='auth-item'>商城申请获取如下权限：</view>
+    <view class='auth-item'>获取你公开的信息（头像，昵称等）</view>
+    <view class='btn-authorize'>
+      <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo='onGotUserInfo'>授权</button>
+    </view>
+  </view>
+</template>
+<style lang="css">
+  page{height:100%;}
+  .authorize-container{
+    height: 100%;
+    background: #fff;
+    text-align: center;
+    padding-top: 30px;
+  }
+.authorize-icon{
+  width: 128px;
+  height: 128px;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+  .auth-item{padding:5px 0;}
+  .btn-authorize{margin: 100px 50px;}
+</style>
+<script>
+  import wepy from 'wepy'
+  export default class Login extends wepy.page {
+    config={
+      navigationBarTitleText:'登录授权'
+    };
+    components={};
+    async onLoad() {
+
+
+
+    }
+    data={userInfo:''};
+    async onLoad() {
+
+     this.userInfo = wepy.getStorageSync('user')
+      if(this.userInfo.nickName){
+        wepy.switchTab({
+          url:'/pages/home'
+        })
+      }
+      console.log(this.userInfo,'user')
+
+      // if ((res.authSetting)['scope.userInfo']) {
+      //   let userInfo = wepy.getStorageSync(USER_INFO)
+      //   if (!userInfo.nickName) {
+      //     let data  = await wepy.getUserInfo()
+      //     if (data) {
+      //       wepy.setStorageSync(USER_INFO, data.userInfo)
+      //     }
+      //     let res = await wepy.login()
+      //     if (res.code) {
+      //       let systemInfo = wepy.getSystemInfoSync();
+      //       wepy.setStorageSync(SYSTEM_INFO, systemInfo);
+      //       let rlt = await api.wxJsCode2Session({
+      //         query: {
+      //           jsCode: res.code,
+      //           nickName: data.userInfo.nickName
+      //         }
+      //       })
+      //       if (rlt.data.result) {
+      //         let data = rlt.data;
+      //         if (data.data.openid) {
+      //           wepy.setStorageSync(USER_SPECICAL_INFO, data.data);
+      //         }
+      //       }
+      //     }
+      //   }
+      //   wepy.switchTab({
+      //     url: '/pages/home'
+      //   })
+      // }
+    }
+    async onGotUserInfo(e){
+      if(e.detail.errMsg=='getUserInfo:ok'){
+        this.userInfo = e.detail.userInfo;
+        wepy.setStorageSync('user',this.userInfo)
+        wepy.switchTab({
+          url:'/pages/home'
+        })
+      }
+    }
+  }
+</script>

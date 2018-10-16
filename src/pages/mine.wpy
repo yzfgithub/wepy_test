@@ -1,0 +1,70 @@
+<template lang="wxml">
+  <view class='mine'>
+      <view class='mine-img'>
+      <image class='img-class' src={{user.avatarUrl}}></image>
+      </view>
+      <view class='mine-text'>
+        <text class='name'>{{user.nickName}}</text>
+        <br/>
+        <text class='gender'>{{user.gender==1?'男':'女'}}</text>
+        <br/>
+        <text class='city'>{{user.city}}</text>
+
+      </view>
+  </view>
+</template>
+<style lang="css">
+  .mine{height:100%;height:100%;}
+  .mine-img{text-align: center;margin-top: 50px;}
+  .img-class{width:120px;height:120px;border-radius:60px;}
+  .mine-text{text-align: center;}
+  .name{ color:blue;display: block;}
+  .gender{color:blue;display: block;}
+  .city{color:blue;display: block;}
+</style>
+<script>
+  import wepy from 'wepy'
+  export default class Mine extends wepy.page {
+    config={
+      navigationBarTitleText:'我的'
+    };
+    components={};
+    data={
+      user:{
+        avatarUrl:'',
+        nickName:'',
+        gender:1,
+        city:''
+      }
+    };
+    methods={};
+    events={};
+    computed={};
+    watch={};
+    mixins=[];
+    onLoad(){
+      this.user = wepy.getStorageSync('user');
+    };
+    onReady(){
+      console.log('onReady')
+    };
+    onShow(){
+      console.log('onShow')
+    };
+    onHide(){
+      console.log('onHide')
+    };
+    onUnload(){
+      console.log('onUnload')
+    };
+    onPullDownRefresh(){
+      console.log('onPullDownRefresh')
+    };
+    onReachBottom(){
+      console.log('onReachBottom')
+    };
+    onShareAppMessage(){
+      console.log('onShareAppMessage')
+    }
+  }
+</script>

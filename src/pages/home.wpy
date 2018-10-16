@@ -1,0 +1,148 @@
+<template lang="wxml">
+  <view>
+    <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <repeat for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </repeat>
+    </swiper>
+    <repeat for="{{taocan}}">
+      <view class='taocan'>
+        <view class='top'>
+         <text class='name' @tap='goDetail'>{{item.name}}</text>
+          <text>{{item.str}}</text>
+        </view>
+         <view class='bottom'>
+         <text class='original'>${{item.original}}</text>
+        <text>     ${{item.cheaper}}</text>
+        </view>
+
+
+      </view>
+
+    </repeat>
+
+  </view>
+</template>
+<style lang="css">
+.img-class{width:60px;height:60px;border-radius:30px;}
+.taocan{height:60px;width:100%;padding: 5px 10px;border:1px solid #ddd;margin:0 auto;margin-bottom: 10px;box-shadow: 0 1px 1px #ddd;position: relative;}
+  .name{font-size: 16px;font-weight: bold;color:skyblue;cursor: pointer;}
+  .original{text-decoration: line-through;color:gray;}
+  .top{}
+  .bottom{position: absolute;bottom:8px;color:red;}
+</style>
+<script>
+  import wepy from 'wepy'
+  export default class Home extends wepy.page {
+    config={
+      navigationBarTitleText:'首页'
+    };
+    components={};
+    data={
+      imgUrls: [
+        'http://d.oss.kuaipeilian.com/poster/t2igl34kbq.jpg',
+        'http://d.oss.kuaipeilian.com/poster/nbwdwpyc38g.jpg',
+        'http://d.oss.kuaipeilian.com/poster/nb9bvrv87g.jpg'
+      ],
+      indicatorDots: true,
+      autoplay: true,
+      interval: 5000,
+      duration: 1000,
+
+      //taocan
+      taocan:[
+        {
+          id:'00001',
+          name:'8天25分钟套餐',
+          cheaper:'1799',
+          original:'2199',
+          delay:'2018-11-1 00:00:00',
+          str:'1'
+        },
+        {
+          id:'00002',
+          name:'8天50分钟套餐',
+          cheaper:'2999',
+          original:'4099',
+          delay:'2018-10-25 00:00:00',
+          str:'2'
+        },
+        {
+          id:'00003',
+          name:'16天25分钟套餐',
+          cheaper:'2899',
+          original:'3999',
+          delay:'2018-10-21 00:00:00',
+          str:'3'
+        },
+        {
+          id:'00004',
+          name:'16天50分钟套餐',
+          cheaper:'5299',
+          original:'6099',
+          delay:'2018-10-30 00:00:00',
+          str:'4'
+        },
+      ]
+    };
+    methods={
+      goDetail(){
+        console.log('asd')
+        wepy.navigateTo({
+          url:'/pages/home/detail'
+        })
+      }
+    };
+
+    events={
+
+    };
+    // freshTime(){
+    //   this.taocan.forEach(item=>{
+    //     console.log(item)
+    //     let endTime = new Date(item.delay);
+    //     let nowTime = new Date();
+    //     let lefttime = parseInt((endTime.getTime()-nowTime.getTime())/1000);
+    //     let d=parseInt(lefttime/(3600*24));
+    //     let h=parseInt(lefttime/3600%24);
+    //     let m=parseInt(lefttime/60%60);
+    //     let s=parseInt(lefttime%60);
+    //     if(d>=1){
+    //       item.str = d+'day'
+    //     }else{
+    //       item.str = h+':'+m+':'+s;
+    //     }
+    //
+    //   })
+
+    // };
+    onLoad(){
+      // let set = setInterval(this.freshTime,1000)
+      // this.freshTime(this.taocan[0].delay);
+    };
+    onReady(){
+      console.log('onReady')
+    };
+    onShow(){
+      console.log('onShow')
+    };
+    onHide(){
+      console.log('onHide')
+    };
+    onUnload(){
+      console.log('onUnload')
+    };
+    onPullDownRefresh(){
+      console.log('onPullDownRefresh')
+    };
+    onReachBottom(){
+      console.log('onReachBottom')
+    };
+    onShareAppMessage(){
+      console.log('onShareAppMessage')
+    }
+  }
+</script>
